@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幽灵按钮</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: #333;
+        }
+        .box{
+            width: 1000px;
+            height: 280px;
+            margin: 50px auto;
+        }
+        .box .link{
+            width: 205px;
+            height: 280px;
+            margin: 0 20px;
+            float: left;
+            position: relative;
+        }
+        .box .icon{
+            width: 100%;
+            height: 190px;
+            display: inline-block;
+            transition: all 0.3s ease ;
+        }
+        .link-miss .icon{
+            background: url("mission.png") no-repeat center center;
+        }
+        .link-play .icon{
+            background: url("play.png") no-repeat center center;
+        }
+        .link-touch .icon{
+            background: url("touch.png") no-repeat center center;
+        }
+        .link .icon:hover{
+            transform: rotate(360deg) scale(1.2);
+            -webkit-transform: rotate(360deg) scale(1.2);
+            -moz-transform: rotate(360deg) scale(1.2);
+            -ms-transform: rotate(360deg) scale(1.2);
+            -o-transform: rotate(360deg) scale(1.2);
+            transform: rotate(360deg) scale(1.2);
+        }
+        .button{
+            display: block;
+            width: 180px;
+            height: 50px;
+            line-height:50px;
+            text-decoration: none;
+            color: #2dcb70;
+            font-family:"微软雅黑";
+            font-weight:bolder;
+            border: 2px solid rgba(255,255,255,0.8);
+            padding-left:20px;
+            margin: 0 auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background: url("allow.png") 130px center no-repeat;
+            transition:all 0.4s ease;
+            position: relative;
+        }
+        .button:hover{
+            border: 2px solid rgba(255,255,255,1);
+            background-position: 140px center;
+        }
+        .button .line{
+            position: absolute;
+            transition: all 0.2s linear;
+            background: none;
+        }
+        .button:hover .line{
+            background-color: #fff;
+        }
+        .button .line-top{
+            height: 2px;
+            width: 0px;
+            left: -110px;
+            top: -2px;
+        }
+        .button:hover .line-top{
+            width: 100%;
+            left: -2px;
+        }
+        .button .line-right{
+            height: 0px;
+            width: 2px;
+            left: 176px;
+            top: -40px;
+        }
+        .button:hover .line-right{
+            height: 100%;
+            top: -2px;
+        }
+        .button .line-bottom{
+            height: 2px;
+            width: 0px;
+            left: 288px;
+            top: 46px;
+        }
+        .button:hover .line-bottom{
+            width: 100%;
+            left: -2px;
+        }
+        .button .line-left{
+            height: 0px;
+            width: 2px;
+            left:-2px;
+            top: 90px;
+        }
+        .button:hover .line-left{
+            height: 100%;
+            top: -2px;
+        }
+        .box .tip{
+            position: absolute;
+            padding:0px 14px;
+            height: 35px;
+            line-height:35px;
+            background-color: #2dcb70;
+            color: white;
+            top:160px;
+            font-size: 16px;
+            text-decoration: none;
+            margin: 0 auto;
+            border-radius:5px;
+            opacity:0;
+        }
+        .tip em{
+            font-style: normal;
+        }
+        .tip span{
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            border: 7px solid transparent;
+            border-top-color:#2dcb70;
+            left:50%;
+            margin-left:-3px;
+            bottom:-14px;
+        }
+    </style>
+    <script src="jquery-2.1.1.min.js"></script>
+</head>
+<body>
+    <div class="box">
+        <div class="link link-miss">
+            <span class="icon"></span>
+            <a href="#" class="button" data-title="所谓事与愿违">
+                <span class="line line-top"></span>
+                <span class="line line-left"></span>
+                <span class="line line-right"></span>
+                <span class="line line-bottom"></span>
+                MISSION
+            </a>
+        </div>
+        <div class="link link-play">
+            <span class="icon"></span>
+            <a href="#" class="button" data-title="总是事与愿违">
+                <span class="line line-top"></span>
+                <span class="line line-left"></span>
+                <span class="line line-right"></span>
+                <span class="line line-bottom"></span>
+                PLAY
+            </a>
+        </div>
+        <div class="link link-touch">
+            <span class="icon"></span>
+            <a href="#" class="button" value="为什么">
+                <span class="line line-top"></span>
+                <span class="line line-left"></span>
+                <span class="line line-right"></span>
+                <span class="line line-bottom"></span>
+                TOUCH
+            </a>
+        </div>
+        <div class="tip">
+            <em></em>
+            <span></span>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('.link .button').mouseenter(function () {
+                var title=$(this).attr('data-title');
+                $('.tip em').text(title);
+                var pos=$(this).offset().left;
+                var dis=($('.tip').outerWidth()-$(this).outerWidth())/2;
+                var f=pos-dis;
+                $('.tip').css({"left":f+"px"}).animate({"top":195,"opacity":0.8},300,function(){
+                    $('.tip').animate({"top":160,"opacity":0})
+                })
+            })
+        })
+    </script>
+</body>
+</html>
